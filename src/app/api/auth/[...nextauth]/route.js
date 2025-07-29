@@ -1,15 +1,15 @@
 import NextAuth from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
-import { db } from '@libs/db';
+import {db} from '@libs/db';
 import bcrypt from 'bcrypt';
 
-const authOptions = {
+export const authOptions = {
 	providers: [
 		CredentialProvider({
 			name: 'Credentials',
 			credentials: {
-				email: { label: 'Email', type: 'text', placeholder: 'jsmith' },
-				password: { label: 'Password', type: 'password', placeholder: '********' },
+				email: {label: 'Email', type: 'text', placeholder: 'jsmith'},
+				password: {label: 'Password', type: 'password', placeholder: '********'},
 			},
 			async authorize(credentials, req) {
 				const userFound = await db.user.findUnique({
@@ -42,4 +42,4 @@ const authOptions = {
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST };
+export {handler as GET, handler as POST};

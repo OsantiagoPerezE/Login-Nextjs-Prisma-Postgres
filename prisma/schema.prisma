@@ -22,3 +22,42 @@ model User{
   createAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Pokemon {
+  id          Int         @id @default(autoincrement())
+  nombre      String
+  numero      Int         @unique
+  imagen      String
+  altura      Int
+  peso        Int
+  tipos       PokemonTipo[]
+  habilidades PokemonHabilidad[]
+}
+
+model Tipo {
+  id     Int           @id @default(autoincrement())
+  nombre String        @unique
+  pokemons PokemonTipo[]
+}
+
+model Habilidad {
+  id     Int               @id @default(autoincrement())
+  nombre String            @unique
+  pokemons PokemonHabilidad[]
+}
+
+model PokemonTipo {
+  id        Int     @id @default(autoincrement())
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+  pokemonId Int
+  tipo      Tipo    @relation(fields: [tipoId], references: [id])
+  tipoId    Int
+}
+
+model PokemonHabilidad {
+  id          Int        @id @default(autoincrement())
+  pokemon     Pokemon    @relation(fields: [pokemonId], references: [id])
+  pokemonId   Int
+  habilidad   Habilidad  @relation(fields: [habilidadId], references: [id])
+  habilidadId Int
+}

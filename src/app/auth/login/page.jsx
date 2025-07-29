@@ -61,7 +61,7 @@ const LoginPage = () => {
 
 				<button
 					type='submit'
-					className='w-full bg-blue-500 text-white p-3 rounded-lg mt-4'
+					className='w-full bg-blue-500 text-white p-3 rounded-lg mt-4 cursor-pointer'
 				>
 					Login
 				</button>
